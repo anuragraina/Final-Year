@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 
-class Test extends StatelessWidget {
-  Test(this.testType);
-  final String testType;
+class TestCard extends StatelessWidget {
+  final String name;
+  final String route;
+
+  TestCard({@required this.name, this.route});
 
   void selectTest(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed('/material-testing');
+    if (route != null) Navigator.of(ctx).pushNamed(route);
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => selectTest(context),
-      splashColor: Colors.blue,
+      splashColor: Theme.of(context).primaryColorLight,
       borderRadius: BorderRadius.circular(15),
-      child: Container(
+      child: Ink(
         width: 200,
         height: 100,
         child: Center(
             child: Text(
-          testType,
-          style: TextStyle(fontSize: 20),
+          name,
+          style: TextStyle(
+            fontSize: 20,
+          ),
         )),
         decoration: BoxDecoration(
           color: Colors.white,

@@ -16,8 +16,8 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Test('Material Testing'),
-            Test('Mix Design'),
+            TestCard(name: 'Material Testing', route: '/material-testing'),
+            TestCard(name: 'Mix Design'),
           ],
         ),
       ),

@@ -13,10 +13,10 @@ class MaterialTesting extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Test('Fine Aggregate'),
-            Test('Coarse Aggregate'),
-            Test('Water'),
-            Test('Concrete'),
+            TestCard(name: 'Fine Aggregate'),
+            TestCard(name: 'Coarse Aggregate'),
+            TestCard(name: 'Water'),
+            TestCard(name: 'Concrete'),
           ],
         ),
       ),
