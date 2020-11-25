@@ -31,74 +31,58 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: 200,
-                height: 100,
-                child: Center(
-                  child: Text(
-                    'Material Testing',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              Container(
-                width: 200,
-                height: 100,
-                child: Center(
-                    child: Text(
-                  'Mix Design',
-                  style: TextStyle(fontSize: 20),
-                )),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
+              Test('Material Testing'),
+              Test('Mix Design'),
             ]),
       ),
       backgroundColor: Colors.blue.shade50,
+    );
+  }
+}
+
+class Test extends StatelessWidget {
+  Test(this.testType);
+  final String testType;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      height: 100,
+      child: Center(
+          child: Text(
+        'Mix Design',
+        style: TextStyle(fontSize: 20),
+      )),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue.shade100,
+            blurRadius: 5.0, // soften the shadow
+            offset: Offset(
+              3.0, // Move to right 10  horizontally
+              5.0, // Move to bottom 10 Vertically
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
