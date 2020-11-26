@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/test_card.dart';
+import '../../widgets/test_category.dart';
 
 class MaterialTesting extends StatelessWidget {
   @override
@@ -13,14 +13,14 @@ class MaterialTesting extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TestCard(name: 'Fine Aggregate'),
-            TestCard(name: 'Coarse Aggregate'),
-            TestCard(name: 'Water'),
-            TestCard(name: 'Concrete'),
+            TestCategory(name: 'Fine Aggregate', route: '/fine-aggregate'),
+            TestCategory(name: 'Coarse Aggregate'),
+            TestCategory(name: 'Water'),
+            TestCategory(name: 'Concrete'),
           ],
         ),
       ),
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Theme.of(context).backgroundColor,
     );
   }
 }

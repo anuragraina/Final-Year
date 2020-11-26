@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/test_card.dart';
+import '../../widgets/test_category.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -16,12 +16,12 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TestCard(name: 'Material Testing', route: '/material-testing'),
-            TestCard(name: 'Mix Design'),
+            TestCategory(name: 'Material Testing', route: '/material-testing'),
+            TestCategory(name: 'Mix Design'),
           ],
         ),
       ),
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Theme.of(context).backgroundColor,
     );
   }
 }

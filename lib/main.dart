@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'screens/home_page/index.dart';
 import './screens/material _testing/material_testing.dart';
+import './screens/fine_aggregate/fine_aggregate.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,10 +29,12 @@ class MyApp extends StatelessWidget {
           // the app on. For desktop platforms, the controls will be smaller and
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          backgroundColor: Colors.blue.shade50,
         ),
         home: MyHomePage(title: 'Final Year Project'),
         routes: {
           '/material-testing': (ctx) => MaterialTesting(),
+          '/fine-aggregate': (ctx) => FineAggregate(),
         });
   }
 }

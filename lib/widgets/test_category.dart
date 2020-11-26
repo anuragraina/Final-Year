@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class TestCard extends StatelessWidget {
+class TestCategory extends StatelessWidget {
   final String name;
   final String route;
 
-  TestCard({@required this.name, this.route});
+  TestCategory({@required this.name, this.route});
 
   void selectTest(BuildContext ctx) {
     if (route != null) Navigator.of(ctx).pushNamed(route);
@@ -31,7 +31,7 @@ class TestCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.blue.shade100,
+              color: Colors.blue.withAlpha(30),
               blurRadius: 5.0, // soften the shadow
               offset: Offset(
                 3.0, // Move to right 10  horizontally
