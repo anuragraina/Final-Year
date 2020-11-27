@@ -23,7 +23,9 @@ class TestCategory extends StatelessWidget {
             child: Text(
           name,
           style: TextStyle(
+            color: route == null ? Colors.grey : Colors.black,
             fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         )),
         decoration: BoxDecoration(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'screens/home_page/index.dart';
 import './screens/material _testing/material_testing.dart';
 import './screens/fine_aggregate/fine_aggregate.dart';
+import './screens/fine_aggregate/moisture_content.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/material-testing': (ctx) => MaterialTesting(),
           '/fine-aggregate': (ctx) => FineAggregate(),
+          '/fine-aggregate/moisture-content': (ctx) => MoistureContent(),
         });
   }
 }
