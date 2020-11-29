@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './alert.dart';
+
 class TestCard extends StatelessWidget {
   final String name;
   final String route;
@@ -7,7 +9,10 @@ class TestCard extends StatelessWidget {
   TestCard({@required this.name, this.route});
 
   void selectTest(BuildContext ctx) {
-    if (route != null) Navigator.of(ctx).pushNamed(route);
+    if (route == null)
+      showAlertDialog(ctx);
+    else
+      Navigator.of(ctx).pushNamed(route);
   }
 
   @override

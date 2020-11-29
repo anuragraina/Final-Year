@@ -36,6 +36,7 @@ class MoistureContent extends StatelessWidget {
                 Container(
                   child: TextField(
                     textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
                   ),
                   width: 40,
                 ),
@@ -52,6 +53,7 @@ class MoistureContent extends StatelessWidget {
                 Container(
                   child: TextField(
                     textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
                   ),
                   width: 40,
                 ),
@@ -68,6 +70,7 @@ class MoistureContent extends StatelessWidget {
                 Container(
                   child: TextField(
                     textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
                   ),
                   width: 40,
                 ),
