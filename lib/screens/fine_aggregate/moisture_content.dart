@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/procedure.dart';
+
 class MoistureContent extends StatelessWidget {
   void calculateA() {}
 
@@ -23,56 +25,20 @@ class MoistureContent extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text(
-                    '1. One litre jar is taken and filled with water upto certain mark and weighed (say Wc )',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
+                Procedure(
+                  procedure:
+                      '1. One litre jar is taken and filled with water upto certain mark and weighed (say Wc )',
+                  variable: 'Wc',
                 ),
-                Container(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                  ),
-                  width: 40,
+                Procedure(
+                  procedure:
+                      '2. Sample of sand (approximate 200 gm) is weighed in a balance (say Ws is the weight )',
+                  variable: 'Ws',
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text(
-                    '2. Sample of sand (approximate 200 gm) is weighed in a balance (say Ws is the weight )',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                Container(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                  ),
-                  width: 40,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text(
-                    '3. Sand sample is filled in the jar and the water is poured upto the previous mark. The jar is again weighed ( say Wm is the weight )',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                Container(
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                  ),
-                  width: 40,
+                Procedure(
+                  procedure:
+                      '3. Sand sample is filled in the jar and the water is poured upto the previous mark. The jar is again weighed ( say Wm is the weight )',
+                  variable: 'Wm',
                 ),
                 Container(
                   child: RaisedButton(
