@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class Procedure extends StatelessWidget {
   final String procedure;
-  final String variable;
 
-  Procedure({@required this.procedure, @required this.variable});
+  Procedure({@required this.procedure});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +24,9 @@ class Procedure extends StatelessWidget {
           child: TextField(
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
+            onChanged: (value) {
+              print(value);
+            },
           ),
           width: 50,
         ),
