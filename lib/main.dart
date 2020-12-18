@@ -5,6 +5,7 @@ import './screens/material _testing/material_testing.dart';
 import './screens/fine_aggregate/fine_aggregate.dart';
 import './screens/fine_aggregate/moisture_content.dart';
 import './screens/fine_aggregate/specific_gravity.dart';
+import './screens/fine_aggregate/silt_content.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
           '/fine-aggregate': (ctx) => FineAggregate(),
           '/fine-aggregate/moisture-content': (ctx) => MoistureContent(),
           '/fine-aggregate/specific-gravity': (ctx) => SpecificGravity(),
+          '/fine-aggregate/silt_content': (ctx) => SiltContent(),
         });
   }
 }
