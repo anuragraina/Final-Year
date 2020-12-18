@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/procedure.dart';
+import '../../widgets/result_alert.dart';
 
 class SiltContent extends StatelessWidget {
+  final data = {};
+
+  void getValues(type, value) {
+    data[type] = double.parse(value);
+  }
+
+  void calculateA(ctx) {
+    final wc = data['wc'];
+    final ws = data['ws'];
+    final wm = data['wm'];
+    final vd = data['vd'];
+
+    if (wc != null && ws != null && wm != null && vd != null) {
+      var vs = wc - wm + ws;
+      var answer = (vs - vd) / (ws - vs);
+      var answerText = 'Percentage of surface moisture = ' + answer.toStringAsFixed(2) + '%';
+      showAlertDialog(ctx, 'Moisture content', answerText);
+    } else {
+      print('missing');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,12 +78,14 @@ class SiltContent extends StatelessWidget {
                 //   height: 15,
                 // ),
                 Procedure(
-                  procedure:
-                      '5. Now note down the silt layer alone volume as V1 ml (settled over the sand)',
-                ),
+                    procedure:
+                        '5. Now note down the silt layer alone volume as V1 ml (settled over the sand)',
+                    getValues: getValues,
+                    type: 'wc'),
                 Procedure(
-                  procedure: '6. Then note down the sand volume (below the silt) as V2 ml',
-                ),
+                    procedure: '6. Then note down the sand volume (below the silt) as V2 ml',
+                    getValues: getValues,
+                    type: 'wc'),
                 Container(
                   child: RaisedButton(
                     onPressed: () {},

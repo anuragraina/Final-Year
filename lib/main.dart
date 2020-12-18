@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
           '/coarse-aggregate': (ctx) => CoarseAggregate(),
           '/fine-aggregate/moisture-content': (ctx) => MoistureContent(),
           '/fine-aggregate/specific-gravity': (ctx) => SpecificGravity(),
-          '/fine-aggregate/silt_content': (ctx) => SiltContent(),
+          '/fine-aggregate/silt-content': (ctx) => SiltContent(),
           '/coarse-aggregate/water-absorption': (ctx) => WaterAbsorption(),
           '/coarse-aggregate/specific-gravity': (ctx) => SpecificGravityCA(),
         });

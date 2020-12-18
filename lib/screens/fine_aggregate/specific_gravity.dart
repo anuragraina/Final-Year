@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/procedure.dart';
+import '../../widgets/result_alert.dart';
 
 class SpecificGravity extends StatelessWidget {
+  final data = {};
+
+  void getValues(type, value) {
+    data[type] = double.parse(value);
+  }
+
+  void calculateA(ctx) {
+    final wc = data['wc'];
+    final ws = data['ws'];
+    final wm = data['wm'];
+    final vd = data['vd'];
+
+    if (wc != null && ws != null && wm != null && vd != null) {
+      var vs = wc - wm + ws;
+      var answer = (vs - vd) / (ws - vs);
+      var answerText = 'Percentage of surface moisture = ' + answer.toStringAsFixed(2) + '%';
+      showAlertDialog(ctx, 'Moisture content', answerText);
+    } else {
+      print('missing');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,17 +102,19 @@ class SpecificGravity extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Procedure(
-                  procedure: 'Weight of Vessel + Sample + Water = A gm',
-                ),
+                    procedure: 'Weight of Vessel + Sample + Water = A gm',
+                    getValues: getValues,
+                    type: 'wc'),
                 Procedure(
-                  procedure: 'Weight of Vessel + Water = B gm',
-                ),
+                    procedure: 'Weight of Vessel + Water = B gm', getValues: getValues, type: 'wc'),
                 Procedure(
-                  procedure: 'Weight of Saturated Surface Dry Sample = C gm',
-                ),
+                    procedure: 'Weight of Saturated Surface Dry Sample = C gm',
+                    getValues: getValues,
+                    type: 'wc'),
                 Procedure(
-                  procedure: 'Weight of Oven Dry Sample = D gm',
-                ),
+                    procedure: 'Weight of Oven Dry Sample = D gm',
+                    getValues: getValues,
+                    type: 'wc'),
                 Center(
                   child: Container(
                     child: RaisedButton(

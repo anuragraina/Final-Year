@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/procedure.dart';
+import '../../widgets/result_alert.dart';
 
 class WaterAbsorption extends StatelessWidget {
-  void calculateA() {}
+  final data = {};
+
+  void getValues(type, value) {
+    data[type] = double.parse(value);
+  }
+
+  void calculateA(ctx) {
+    final wc = data['wc'];
+    final ws = data['ws'];
+    final wm = data['wm'];
+    final vd = data['vd'];
+
+    if (wc != null && ws != null && wm != null && vd != null) {
+      var vs = wc - wm + ws;
+      var answer = (vs - vd) / (ws - vs);
+      var answerText = 'Percentage of surface moisture = ' + answer.toStringAsFixed(2) + '%';
+      showAlertDialog(ctx, 'Moisture content', answerText);
+    } else {
+      print('missing');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +47,10 @@ class WaterAbsorption extends StatelessWidget {
                   ),
                 ),
                 Procedure(
-                  procedure:
-                      '1. A sample of about 3000 gm of aggregates shall be taken and dried in a ventilated oven at 110° C for 24 hours. It should then be cooled and weighed accurately (Weight A).',
-                ),
+                    procedure:
+                        '1. A sample of about 3000 gm of aggregates shall be taken and dried in a ventilated oven at 110° C for 24 hours. It should then be cooled and weighed accurately (Weight A).',
+                    getValues: getValues,
+                    type: 'wc'),
                 SizedBox(
                   height: 15,
                 ),
@@ -40,12 +62,13 @@ class WaterAbsorption extends StatelessWidget {
                   height: 15,
                 ),
                 Procedure(
-                  procedure:
-                      '3. The sample will then be taken out of water and the surface water in the particles is removed by means of a damp cloth. The surface dried sample will then be immediately weight (Weight B).',
-                ),
+                    procedure:
+                        '3. The sample will then be taken out of water and the surface water in the particles is removed by means of a damp cloth. The surface dried sample will then be immediately weight (Weight B).',
+                    getValues: getValues,
+                    type: 'wc'),
                 Container(
                   child: RaisedButton(
-                    onPressed: calculateA,
+                    onPressed: () => calculateA(context),
                     color: Colors.blue,
                     textColor: Colors.white,
                     child: Text(

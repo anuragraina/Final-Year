@@ -14,21 +14,11 @@ class CoarseAggregate extends StatelessWidget {
         children: [
           TestCard(name: 'Petrographical analysis'),
           TestCard(name: 'Grading Analysis'),
-          TestCard(
-            name: 'Moisture content ',
-          ),
-          TestCard(
-            name: 'Elongation Index and Flakiness Index',
-          ),
+          TestCard(name: 'Moisture content '),
+          TestCard(name: 'Elongation Index and Flakiness Index'),
           TestCard(name: 'Deleterious material'),
-          TestCard(
-            name: 'Specific gravity',
-            route: '/coarse-aggregate/specific-gravity',
-          ),
-          TestCard(
-            name: 'Water Absorption',
-            route: '/coarse-aggregate/water-absorption',
-          ),
+          TestCard(name: 'Specific gravity', route: '/coarse-aggregate/specific-gravity'),
+          TestCard(name: 'Water Absorption', route: '/coarse-aggregate/water-absorption'),
           TestCard(name: 'Organic impurity'),
           TestCard(name: 'Chloride Content & Sulphate Content'),
           TestCard(name: 'Alkali aggregate reactivity'),
