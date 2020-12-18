@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
 
-class Procedure extends StatelessWidget {
+class Procedure extends StatefulWidget {
   final String procedure;
+  final String type;
+  final Function getValues;
 
-  Procedure({@required this.procedure});
+  Procedure({@required this.procedure, @required this.getValues, @required this.type});
+
+  @override
+  _ProcedureState createState() => _ProcedureState();
+}
+
+class _ProcedureState extends State<Procedure> {
+  FocusNode focusNode;
+  String inputText;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = new FocusNode();
+    focusNode.addListener(() {
+      if (!focusNode.hasFocus) {
+        widget.getValues(widget.type, inputText);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +34,7 @@ class Procedure extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: Text(
-            procedure,
+            widget.procedure,
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 16,
@@ -25,8 +46,9 @@ class Procedure extends StatelessWidget {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onChanged: (value) {
-              print(value);
+              inputText = value;
             },
+            focusNode: focusNode,
           ),
           width: 50,
         ),

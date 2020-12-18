@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './alert.dart';
+import 'coming_soon_alert.dart';
 
 class TestCategory extends StatelessWidget {
   final String name;
