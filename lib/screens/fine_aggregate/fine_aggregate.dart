@@ -14,7 +14,7 @@ class FineAggregate extends StatelessWidget {
         children: [
           TestCard(name: 'Sieve Analysis / Gradation'),
           TestCard(name: 'Moisture content', route: '/fine-aggregate/moisture-content'),
-          TestCard(name: 'Specific Gravity / Absorption'),
+          TestCard(name: 'Specific Gravity / Absorption', route: '/fine-aggregate/specific-gravity',),
           TestCard(name: 'Silt Content'),
           TestCard(name: 'Deleterious material'),
           TestCard(name: 'Organic impurity'),
