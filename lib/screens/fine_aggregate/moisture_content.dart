@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/procedure.dart';
+import '../../widgets/result_alert.dart';
 
 class MoistureContent extends StatelessWidget {
   final data = {};
@@ -9,7 +10,7 @@ class MoistureContent extends StatelessWidget {
     data[type] = double.parse(value);
   }
 
-  void calculateA() {
+  void calculateA(ctx) {
     final wc = data['wc'];
     final ws = data['ws'];
     final wm = data['wm'];
@@ -18,7 +19,8 @@ class MoistureContent extends StatelessWidget {
     if (wc != null && ws != null && wm != null && vd != null) {
       var vs = wc - wm + ws;
       var answer = (vs - vd) / (ws - vs);
-      print(answer);
+      var answerText = 'Percentage of surface moisture = ' + answer.toStringAsFixed(2) + '%';
+      showAlertDialog(ctx, 'Moisture content', answerText);
     } else {
       print('missing');
     }
@@ -65,7 +67,7 @@ class MoistureContent extends StatelessWidget {
                     type: 'vd'),
                 Container(
                   child: RaisedButton(
-                    onPressed: calculateA,
+                    onPressed: () => calculateA(context),
                     color: Colors.blue,
                     textColor: Colors.white,
                     child: Text(
