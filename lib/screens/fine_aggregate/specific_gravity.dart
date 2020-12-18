@@ -136,7 +136,6 @@ class SpecificGravity extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // padding: const EdgeInsets.all(25),
                     ),
                   )
                 ],
