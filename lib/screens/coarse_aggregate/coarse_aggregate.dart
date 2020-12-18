@@ -21,7 +21,10 @@ class CoarseAggregate extends StatelessWidget {
             name: 'Elongation Index and Flakiness Index',
           ),
           TestCard(name: 'Deleterious material'),
-          TestCard(name: 'Specific gravity'),
+          TestCard(
+            name: 'Specific gravity',
+            route: '/coarse-aggregate/specific-gravity',
+          ),
           TestCard(
             name: 'Water Absorption',
             route: '/coarse-aggregate/water-absorption',

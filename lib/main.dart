@@ -8,6 +8,7 @@ import './screens/fine_aggregate/moisture_content.dart';
 import './screens/fine_aggregate/specific_gravity.dart';
 import './screens/fine_aggregate/silt_content.dart';
 import './screens/coarse_aggregate/water_absorption.dart';
+import './screens/coarse_aggregate/specific_gravity_ca.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
           '/fine-aggregate/specific-gravity': (ctx) => SpecificGravity(),
           '/fine-aggregate/silt_content': (ctx) => SiltContent(),
           '/coarse-aggregate/water-absorption': (ctx) => WaterAbsorption(),
+          '/coarse-aggregate/specific-gravity': (ctx) => SpecificGravityCA(),
         });
   }
 }
