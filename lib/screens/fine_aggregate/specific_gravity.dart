@@ -10,17 +10,16 @@ class SpecificGravity extends StatelessWidget {
     data[type] = double.parse(value);
   }
 
-  void calculateA(ctx) {
-    final wc = data['wc'];
-    final ws = data['ws'];
-    final wm = data['wm'];
-    final vd = data['vd'];
+  void calculate(ctx) {
+    final a = data['a'];
+    final b = data['b'];
+    final c = data['c'];
+    final d = data['d'];
 
-    if (wc != null && ws != null && wm != null && vd != null) {
-      var vs = wc - wm + ws;
-      var answer = (vs - vd) / (ws - vs);
-      var answerText = 'Percentage of surface moisture = ' + answer.toStringAsFixed(2) + '%';
-      showAlertDialog(ctx, 'Moisture content', answerText);
+    if (a != null && b != null && c != null && d != null) {
+      var answer = d / (c - (a - b));
+      var answerText = 'Specific Gravity = ' + answer.toStringAsFixed(2) + ' g/cc';
+      showAlertDialog(ctx, 'Specific Gravity', answerText);
     } else {
       print('missing');
     }
@@ -98,41 +97,50 @@ class SpecificGravity extends StatelessWidget {
           ),
           Card(
             margin: EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Procedure(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Procedure(
                     procedure: 'Weight of Vessel + Sample + Water = A gm',
                     getValues: getValues,
-                    type: 'wc'),
-                Procedure(
-                    procedure: 'Weight of Vessel + Water = B gm', getValues: getValues, type: 'wc'),
-                Procedure(
+                    type: 'a',
+                  ),
+                  Procedure(
+                    procedure: 'Weight of Vessel + Water = B gm',
+                    getValues: getValues,
+                    type: 'b',
+                  ),
+                  Procedure(
                     procedure: 'Weight of Saturated Surface Dry Sample = C gm',
                     getValues: getValues,
-                    type: 'wc'),
-                Procedure(
+                    type: 'c',
+                  ),
+                  Procedure(
                     procedure: 'Weight of Oven Dry Sample = D gm',
                     getValues: getValues,
-                    type: 'wc'),
-                Center(
-                  child: Container(
-                    child: RaisedButton(
-                      onPressed: () {},
-                      color: Colors.blue,
-                      textColor: Colors.white,
-                      padding: EdgeInsets.all(5),
-                      child: Text(
-                        'Calculate',
-                        style: TextStyle(
-                          fontSize: 16,
+                    type: 'd',
+                  ),
+                  Center(
+                    child: Container(
+                      child: RaisedButton(
+                        onPressed: () => calculate(context),
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          'Calculate',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                       ),
+                      // padding: const EdgeInsets.all(25),
                     ),
-                    // padding: const EdgeInsets.all(25),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ],

@@ -47,24 +47,27 @@ class MoistureContent extends StatelessWidget {
                   ),
                 ),
                 Procedure(
-                    procedure:
-                        '1. One litre jar is taken and filled with water upto certain mark and weighed (say Wc )',
-                    getValues: getValues,
-                    type: 'wc'),
+                  procedure:
+                      '1. One litre jar is taken and filled with water upto certain mark and weighed (say Wc )',
+                  getValues: getValues,
+                  type: 'wc',
+                ),
                 Procedure(
                     procedure:
                         '2. Sample of sand (approximate 200 gm) is weighed in a balance (say Ws is the weight )',
                     getValues: getValues,
-                    type: 'ws'),
+                    type: 'ws,'),
                 Procedure(
-                    procedure:
-                        '3. Sand sample is filled in the jar and the water is poured upto the previous mark. The jar is again weighed ( say Wm is the weight )',
-                    getValues: getValues,
-                    type: 'wm'),
+                  procedure:
+                      '3. Sand sample is filled in the jar and the water is poured upto the previous mark. The jar is again weighed ( say Wm is the weight )',
+                  getValues: getValues,
+                  type: 'wm',
+                ),
                 Procedure(
-                    procedure: '4. Weight of sample divided by specific gravity on SSD basis. (Vd)',
-                    getValues: getValues,
-                    type: 'vd'),
+                  procedure: '4. Weight of sample divided by specific gravity on SSD basis. (Vd)',
+                  getValues: getValues,
+                  type: 'vd',
+                ),
                 Container(
                   child: RaisedButton(
                     onPressed: () => calculateA(context),

@@ -10,17 +10,14 @@ class SiltContent extends StatelessWidget {
     data[type] = double.parse(value);
   }
 
-  void calculateA(ctx) {
-    final wc = data['wc'];
-    final ws = data['ws'];
-    final wm = data['wm'];
-    final vd = data['vd'];
+  void calculate(ctx) {
+    final v1 = data['v1'];
+    final v2 = data['v2'];
 
-    if (wc != null && ws != null && wm != null && vd != null) {
-      var vs = wc - wm + ws;
-      var answer = (vs - vd) / (ws - vs);
-      var answerText = 'Percentage of surface moisture = ' + answer.toStringAsFixed(2) + '%';
-      showAlertDialog(ctx, 'Moisture content', answerText);
+    if (v1 != null && v2 != null) {
+      var answer = (v2 / v1) * 100;
+      var answerText = 'Percentage of silt = ' + answer.toStringAsFixed(2) + '%';
+      showAlertDialog(ctx, 'Silt content of sand', answerText);
     } else {
       print('missing');
     }
@@ -78,17 +75,19 @@ class SiltContent extends StatelessWidget {
                 //   height: 15,
                 // ),
                 Procedure(
-                    procedure:
-                        '5. Now note down the silt layer alone volume as V1 ml (settled over the sand)',
-                    getValues: getValues,
-                    type: 'wc'),
+                  procedure:
+                      '5. Now note down the silt layer alone volume as V1 ml (settled over the sand)',
+                  getValues: getValues,
+                  type: 'v1',
+                ),
                 Procedure(
-                    procedure: '6. Then note down the sand volume (below the silt) as V2 ml',
-                    getValues: getValues,
-                    type: 'wc'),
+                  procedure: '6. Then note down the sand volume (below the silt) as V2 ml',
+                  getValues: getValues,
+                  type: 'v2',
+                ),
                 Container(
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () => calculate(context),
                     color: Colors.blue,
                     textColor: Colors.white,
                     child: Text(
