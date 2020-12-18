@@ -53,10 +53,11 @@ class MoistureContent extends StatelessWidget {
                   type: 'wc',
                 ),
                 Procedure(
-                    procedure:
-                        '2. Sample of sand (approximate 200 gm) is weighed in a balance (say Ws is the weight )',
-                    getValues: getValues,
-                    type: 'ws,'),
+                  procedure:
+                      '2. Sample of sand (approximate 200 gm) is weighed in a balance (say Ws is the weight )',
+                  getValues: getValues,
+                  type: 'ws',
+                ),
                 Procedure(
                   procedure:
                       '3. Sand sample is filled in the jar and the water is poured upto the previous mark. The jar is again weighed ( say Wm is the weight )',
