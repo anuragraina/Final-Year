@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'screens/home_page/index.dart';
+import './screens/contact_us/contact_us.dart';
 import './screens/material _testing/material_testing.dart';
 import './screens/fine_aggregate/fine_aggregate.dart';
 import './screens/coarse_aggregate/coarse_aggregate.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         home: MyHomePage(title: 'Final Year Project'),
         routes: {
           '/material-testing': (ctx) => MaterialTesting(),
+          '/contact-us': (ctx) => ContactUs(),
           '/fine-aggregate': (ctx) => FineAggregate(),
           '/coarse-aggregate': (ctx) => CoarseAggregate(),
           '/fine-aggregate/moisture-content': (ctx) => MoistureContent(),

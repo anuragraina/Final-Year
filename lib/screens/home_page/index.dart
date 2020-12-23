@@ -17,7 +17,8 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TestCategory(name: 'Material Testing', route: '/material-testing'),
-            TestCategory(name: 'Mix Design'),
+            TestCategory(name: 'Report'),
+            TestCategory(name: 'Contact Us', route: '/contact-us'),
           ],
         ),
       ),
