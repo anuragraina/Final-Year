@@ -7,6 +7,7 @@ class MoistureContent extends StatelessWidget {
   final data = {};
 
   void getValues(type, value) {
+    //add error handling
     data[type] = double.parse(value);
   }
 

@@ -7,6 +7,7 @@ class SpecificGravityCA extends StatelessWidget {
   final data = {};
 
   void getValues(type, value) {
+    //add error handling
     data[type] = double.parse(value);
   }
 
@@ -144,6 +145,7 @@ class SpecificGravityCA extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
     );
   }
 }

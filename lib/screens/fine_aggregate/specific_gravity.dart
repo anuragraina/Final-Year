@@ -144,6 +144,7 @@ class SpecificGravity extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
     );
   }
 }
