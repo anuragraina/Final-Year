@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/test_category.dart';
+import '../../services/auth.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text('Testing'),
+        actions: <Widget>[
+          FlatButton.icon(
+            onPressed: () async {
+              await _auth.logOut();
+            },
+            icon: Icon(Icons.person),
+            label: Text('Logout'),
+          )
+        ],
       ),
       body: Center(
         child: Column(
