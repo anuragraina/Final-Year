@@ -1,15 +1,29 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/user.dart';
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  //Create a user obj based on Firebase user
+  CustomUser _createUser(User user) {
+    return user != null ? CustomUser(uid: user.uid) : null;
+  }
+
+  Stream<CustomUser> get user {
+    return _auth.authStateChanges().map(_createUser);
+  }
+
+//Sign in the user
   Future signIn(String email, String password) async {
     try {
-      UserCredential user = await _auth.signInWithEmailAndPassword(
+      UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return user;
+
+      User user = result.user;
+      return _createUser(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');

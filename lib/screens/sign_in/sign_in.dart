@@ -41,7 +41,7 @@ class _SignInState extends State<SignIn> {
                 child: Text('Sign In'),
                 onPressed: () async {
                   dynamic result = await _auth.signIn(email, password);
-                  print(result);
+                  print(result.uid);
                 },
               )
             ],
