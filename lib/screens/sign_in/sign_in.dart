@@ -40,7 +40,8 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                 child: Text('Sign In'),
                 onPressed: () async {
-                  await _auth.signIn(email, password);
+                  dynamic result = await _auth.signIn(email, password);
+                  print(result);
                 },
               )
             ],

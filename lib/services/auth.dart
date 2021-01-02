@@ -9,7 +9,7 @@ class AuthService {
         email: email,
         password: password,
       );
-      print(user);
+      return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -18,6 +18,8 @@ class AuthService {
       } else {
         print(e);
       }
+
+      return null;
     }
   }
 }
