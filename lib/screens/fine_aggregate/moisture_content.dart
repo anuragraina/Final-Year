@@ -26,6 +26,7 @@ class MoistureContent extends StatelessWidget {
       var answerString = answer.toStringAsFixed(2) + '%';
       var answerText = 'Percentage of surface moisture = ' + answerString;
       showAlertDialog(ctx, 'Moisture content', answerText);
+
       _database.addTest(
         testCategory: 'Fine Aggregate',
         testName: 'Moisture Content',

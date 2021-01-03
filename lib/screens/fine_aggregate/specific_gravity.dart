@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../services/database.dart';
+
 import '../../widgets/procedure.dart';
 import '../../widgets/result_alert.dart';
 
 class SpecificGravity extends StatelessWidget {
+  final DatabaseService _database = DatabaseService();
   final data = {};
 
   void getValues(type, value) {
@@ -18,8 +21,21 @@ class SpecificGravity extends StatelessWidget {
 
     if (a != null && b != null && c != null && d != null) {
       var answer = d / (c - (a - b));
-      var answerText = 'Specific Gravity = ' + answer.toStringAsFixed(2) + ' g/cc';
+      var answerString = answer.toStringAsFixed(2) + ' g/cc';
+      var answerText = 'Specific Gravity = ' + answerString;
       showAlertDialog(ctx, 'Specific Gravity', answerText);
+
+      _database.addTest(
+        testCategory: 'Fine Aggregate',
+        testName: 'Specific Gravity',
+        values: {
+          'a': a,
+          'b': b,
+          'c': c,
+          'd': d,
+          'Specific Gravity': answerString,
+        },
+      );
     } else {
       print('missing');
     }

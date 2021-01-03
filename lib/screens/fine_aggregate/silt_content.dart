@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../services/database.dart';
+
 import '../../widgets/procedure.dart';
 import '../../widgets/result_alert.dart';
 
 class SiltContent extends StatelessWidget {
+  final DatabaseService _database = DatabaseService();
   final data = {};
 
   void getValues(type, value) {
@@ -17,8 +20,19 @@ class SiltContent extends StatelessWidget {
 
     if (v1 != null && v2 != null) {
       var answer = (v2 / v1) * 100;
-      var answerText = 'Percentage of silt = ' + answer.toStringAsFixed(2) + '%';
+      var answerString = answer.toStringAsFixed(2) + '%';
+      var answerText = 'Percentage of silt = ' + answerString;
       showAlertDialog(ctx, 'Silt content of sand', answerText);
+
+      _database.addTest(
+        testCategory: 'Fine Aggregate',
+        testName: 'Silt Content',
+        values: {
+          'v1': v1,
+          'v2': v2,
+          'Percentage of silt': answerString,
+        },
+      );
     } else {
       print('missing');
     }

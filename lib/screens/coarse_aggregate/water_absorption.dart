@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../services/database.dart';
+
 import '../../widgets/procedure.dart';
 import '../../widgets/result_alert.dart';
 
 class WaterAbsorption extends StatelessWidget {
+  final DatabaseService _database = DatabaseService();
   final data = {};
 
   void getValues(type, value) {
@@ -16,8 +19,19 @@ class WaterAbsorption extends StatelessWidget {
 
     if (a != null && b != null) {
       var answer = ((b - a) / a) * 100;
-      var answerText = 'Water Absorption = ' + answer.toStringAsFixed(2) + '%';
+      var answerString = answer.toStringAsFixed(2) + '%';
+      var answerText = 'Water Absorption = ' + answerString;
       showAlertDialog(ctx, 'Water Absorption of Coarse Aggregates', answerText);
+
+      _database.addTest(
+        testCategory: 'Coarse Aggregate',
+        testName: 'Water Absorption',
+        values: {
+          'a': a,
+          'b': b,
+          'Water Absorption': answerString,
+        },
+      );
     } else {
       print('missing');
     }

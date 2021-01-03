@@ -13,9 +13,10 @@ class DatabaseService {
     try {
       var user = _auth.currentUser();
       DocumentReference result = await _newTests.add({
-        'created-by': user,
-        'test-category': testCategory,
-        'test-name': testName,
+        'created_by': user,
+        'created_on': FieldValue.serverTimestamp(),
+        'test_category': testCategory,
+        'test_name': testName,
         'values': values,
       });
       print(result);
