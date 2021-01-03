@@ -46,4 +46,9 @@ class AuthService {
       return null;
     }
   }
+
+  String currentUser() {
+    final User user = _auth.currentUser;
+    return user.uid;
+  }
 }

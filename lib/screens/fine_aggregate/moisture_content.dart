@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../services/database.dart';
+
 import '../../widgets/procedure.dart';
 import '../../widgets/result_alert.dart';
 
 class MoistureContent extends StatelessWidget {
+  final DatabaseService _database = DatabaseService();
   final data = {};
 
   void getValues(type, value) {
@@ -20,8 +23,20 @@ class MoistureContent extends StatelessWidget {
     if (wc != null && ws != null && wm != null && vd != null) {
       var vs = wc - wm + ws;
       var answer = (vs - vd) / (ws - vs);
-      var answerText = 'Percentage of surface moisture = ' + answer.toStringAsFixed(2) + '%';
+      var answerString = answer.toStringAsFixed(2) + '%';
+      var answerText = 'Percentage of surface moisture = ' + answerString;
       showAlertDialog(ctx, 'Moisture content', answerText);
+      _database.addTest(
+        testCategory: 'Fine Aggregate',
+        testName: 'Moisture Content',
+        values: {
+          'wc': wc,
+          'ws': ws,
+          'wm': wm,
+          'vd': vd,
+          'Percentage of surface moisture': answerString
+        },
+      );
     } else {
       print('missing');
     }
