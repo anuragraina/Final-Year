@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:progress_dialog/progress_dialog.dart';
+
 import '../../services/auth.dart';
 
 class SignIn extends StatefulWidget {
@@ -15,6 +17,19 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pr = ProgressDialog(context);
+    pr = ProgressDialog(
+      context,
+      type: ProgressDialogType.Normal,
+      isDismissible: true,
+
+      /// your body here
+      customBody: LinearProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+        backgroundColor: Theme.of(context).backgroundColor,
+      ),
+    );
+
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -75,8 +90,10 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                       onPressed: () async {
+                        await pr.show();
                         dynamic result = await _auth.signIn(email, password);
                         print(result.uid);
+                        await pr.hide();
                       },
                     )
                   ],
