@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:progress_dialog/progress_dialog.dart';
-
+import '../../widgets/sign_in_error_alert.dart';
 import '../../services/auth.dart';
 
 class SignIn extends StatefulWidget {
@@ -92,8 +92,12 @@ class _SignInState extends State<SignIn> {
                       onPressed: () async {
                         await pr.show();
                         dynamic result = await _auth.signIn(email, password);
-                        print(result.uid);
+                        print(result);
                         await pr.hide();
+                        if (result == null) {
+                          //Create Alertbox
+                          showAlertDialog(context);
+                        }
                       },
                     )
                   ],
