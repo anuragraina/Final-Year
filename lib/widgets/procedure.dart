@@ -42,6 +42,9 @@ class _ProcedureState extends State<Procedure> {
             ),
           ),
         ),
+        SizedBox(
+          height: 10,
+        ),
         Container(
           child: TextField(
             textAlign: TextAlign.center,
@@ -50,8 +53,19 @@ class _ProcedureState extends State<Procedure> {
               inputText = value;
             },
             focusNode: focusNode,
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(color: Colors.black),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(color: Colors.blueAccent),
+              ),
+            ),
           ),
           width: 50,
+          height: 45,
         ),
       ],
     );

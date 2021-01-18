@@ -4,6 +4,8 @@ import '../../services/database.dart';
 
 import '../../widgets/procedure.dart';
 import '../../widgets/result_alert.dart';
+import '../../widgets/wrong_input_test_alert.dart';
+import '../../widgets/missing_input.dart';
 
 class SpecificGravityCA extends StatelessWidget {
   final DatabaseService _database = DatabaseService();
@@ -22,23 +24,27 @@ class SpecificGravityCA extends StatelessWidget {
 
     if (a != null && b != null && c != null && d != null) {
       var answer = d / (c - (a - b));
-      var answerString = answer.toStringAsFixed(2) + ' g/cc';
-      var answerText = 'Specific Gravity = ' + answerString;
-      showAlertDialog(ctx, 'Specific Gravity', answerText);
+      if (answer >= 1 && answer <= 4) {
+        var answerString = answer.toStringAsFixed(2) + ' g/cc';
+        var answerText = 'Specific Gravity = ' + answerString;
+        showAlertDialog(ctx, 'Specific Gravity', answerText);
 
-      _database.addTest(
-        testCategory: 'Coarse Aggregate',
-        testName: 'Specific Gravity',
-        values: {
-          'a': a,
-          'b': b,
-          'c': c,
-          'd': d,
-          'Specific Gravity': answerString,
-        },
-      );
+        _database.addTest(
+          testCategory: 'Coarse Aggregate',
+          testName: 'Specific Gravity',
+          values: {
+            'a': a,
+            'b': b,
+            'c': c,
+            'd': d,
+            'Specific Gravity': answerString,
+          },
+        );
+      } else {
+        showAlertDialogWrongInput(ctx);
+      }
     } else {
-      print('missing');
+      showAlertDialogMissingInput(ctx);
     }
   }
 

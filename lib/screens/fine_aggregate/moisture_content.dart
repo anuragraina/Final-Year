@@ -4,6 +4,7 @@ import '../../services/database.dart';
 
 import '../../widgets/procedure.dart';
 import '../../widgets/result_alert.dart';
+import '../../widgets/missing_input.dart';
 
 class MoistureContent extends StatelessWidget {
   final DatabaseService _database = DatabaseService();
@@ -39,7 +40,7 @@ class MoistureContent extends StatelessWidget {
         },
       );
     } else {
-      print('missing');
+      showAlertDialogMissingInput(ctx);
     }
   }
 
@@ -119,7 +120,7 @@ class MoistureContent extends StatelessWidget {
               child: Column(
                 children: [
                   Procedure(
-                    procedure: 'Wc',
+                    procedure: 'Wc gm',
                     getValues: getValues,
                     type: 'wc',
                   ),
@@ -127,7 +128,7 @@ class MoistureContent extends StatelessWidget {
                     height: 10,
                   ),
                   Procedure(
-                    procedure: 'Ws',
+                    procedure: 'Ws gm',
                     getValues: getValues,
                     type: 'ws',
                   ),
@@ -135,7 +136,7 @@ class MoistureContent extends StatelessWidget {
                     height: 10,
                   ),
                   Procedure(
-                    procedure: 'Wm',
+                    procedure: 'Wm gm',
                     getValues: getValues,
                     type: 'wm',
                   ),

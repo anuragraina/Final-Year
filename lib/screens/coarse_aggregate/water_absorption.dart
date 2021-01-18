@@ -4,6 +4,7 @@ import '../../services/database.dart';
 
 import '../../widgets/procedure.dart';
 import '../../widgets/result_alert.dart';
+import '../../widgets/missing_input.dart';
 
 class WaterAbsorption extends StatelessWidget {
   final DatabaseService _database = DatabaseService();
@@ -33,7 +34,7 @@ class WaterAbsorption extends StatelessWidget {
         },
       );
     } else {
-      print('missing');
+      showAlertDialogMissingInput(ctx);
     }
   }
 
