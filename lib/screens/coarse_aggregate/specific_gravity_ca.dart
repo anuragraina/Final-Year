@@ -116,6 +116,9 @@ class SpecificGravityCA extends StatelessWidget {
                             '6. Next the aggregate is placed in the tray and kept in the oven at a temperature of 100o C to 110o C for 24 + ½ hours. It is then cooled in airtight container and weighed. Let the weight be `D’.',
                             style: TextStyle(fontSize: 16),
                           ),
+                          SizedBox(
+                            height: 15,
+                          ),
                         ],
                       ),
                     ),
