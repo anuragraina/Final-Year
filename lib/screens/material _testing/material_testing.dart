@@ -7,7 +7,7 @@ class MaterialTesting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Material Testing'),
+        title: Text('New Test'),
       ),
       body: Center(
         child: Column(
