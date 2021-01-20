@@ -10,7 +10,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Testing'),
+        title: Text('Material Testing'),
         actions: <Widget>[
           FlatButton.icon(
             textColor: Colors.white,
@@ -29,8 +29,15 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TestCategory(name: 'Material Testing', route: '/material-testing'),
-            TestCategory(name: 'Mix Design'),
+            TestCategory(name: 'New Test', route: '/material-testing'),
+            TestCategory(
+              name: 'Approved Tests',
+              route: '/approved-tests',
+            ),
+            TestCategory(
+              name: 'Pending Tests',
+              route: '/pending-tests',
+            ),
           ],
         ),
       ),
