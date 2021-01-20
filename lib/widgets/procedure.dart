@@ -38,8 +38,12 @@ class _ProcedureState extends State<Procedure> {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
+        ),
+        SizedBox(
+          height: 10,
         ),
         Container(
           child: TextField(
@@ -49,8 +53,19 @@ class _ProcedureState extends State<Procedure> {
               inputText = value;
             },
             focusNode: focusNode,
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(color: Colors.black),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(color: Colors.blueAccent),
+              ),
+            ),
           ),
           width: 50,
+          height: 45,
         ),
       ],
     );
