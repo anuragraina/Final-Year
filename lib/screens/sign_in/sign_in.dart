@@ -58,8 +58,7 @@ class _SignInState extends State<SignIn> {
             margin: EdgeInsets.only(top: 30),
             child: Form(
               child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: ListView(
                   children: <Widget>[
                     SizedBox(height: 20.0),
                     Container(
@@ -103,26 +102,29 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     SizedBox(height: 20.0),
-                    RaisedButton(
-                      color: Theme.of(context).primaryColor,
-                      textColor: Colors.white,
-                      padding: EdgeInsets.all(5),
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(
-                          fontSize: 16,
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 100),
+                      child: RaisedButton(
+                        color: Theme.of(context).primaryColor,
+                        textColor: Colors.white,
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
+                        onPressed: () async {
+                          await pr.show();
+                          dynamic result = await _auth.signIn(email, password);
+                          print(result);
+                          await pr.hide();
+                          if (result == null) {
+                            //Create Alertbox
+                            showAlertDialog(context);
+                          }
+                        },
                       ),
-                      onPressed: () async {
-                        await pr.show();
-                        dynamic result = await _auth.signIn(email, password);
-                        print(result);
-                        await pr.hide();
-                        if (result == null) {
-                          //Create Alertbox
-                          showAlertDialog(context);
-                        }
-                      },
                     ),
                     TextButton(
                       child: Text(

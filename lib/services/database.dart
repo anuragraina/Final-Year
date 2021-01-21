@@ -5,6 +5,7 @@ class DatabaseService {
   final AuthService _auth = AuthService();
   final CollectionReference _newTests = FirebaseFirestore.instance.collection('newTests');
 
+  //respond if addition was successful or not
   Future addTest({
     String testCategory,
     String testName,
