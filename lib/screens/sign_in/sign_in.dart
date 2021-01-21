@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import '../../widgets/sign_in_error_alert.dart';
 import '../../services/auth.dart';
+import '../../widgets/reset_password.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -49,7 +50,7 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Sign In'),
+          title: Text('Proton Easy+'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),
@@ -122,7 +123,15 @@ class _SignInState extends State<SignIn> {
                           showAlertDialog(context);
                         }
                       },
-                    )
+                    ),
+                    TextButton(
+                      child: Text(
+                        'Forgot Password?',
+                      ),
+                      onPressed: () {
+                        resetPassword(context);
+                      },
+                    ),
                   ],
                 ),
               ),
