@@ -23,7 +23,7 @@ class TestCard extends StatelessWidget {
       child: InkWell(
         onTap: () => selectTest(context),
         splashColor: Theme.of(context).primaryColorLight,
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(50),
         child: ListTile(
           title: Text(
             name,

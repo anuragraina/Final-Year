@@ -54,6 +54,8 @@ class _ProcedureState extends State<Procedure> {
             },
             focusNode: focusNode,
             decoration: InputDecoration(
+              fillColor: Theme.of(context).backgroundColor,
+              filled: true,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
                 borderSide: BorderSide(color: Colors.black),
