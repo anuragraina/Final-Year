@@ -12,8 +12,16 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
 
+  bool _obscureText = true;
+
   String email = '';
   String password = '';
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class _SignInState extends State<SignIn> {
 
       /// your body here
       customBody: LinearProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+        valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange),
         backgroundColor: Theme.of(context).backgroundColor,
       ),
     );
@@ -55,32 +63,47 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: 20.0),
                     Container(
                       width: 325,
-                      child: TextFormField(
-                        // autofocus: true,
-                        onChanged: (value) {
-                          setState(() => email = value);
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Enter email',
+                      child: ListTile(
+                        leading: const Icon(Icons.email),
+                        title: TextFormField(
+                          onChanged: (value) {
+                            setState(() => email = value);
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Enter email',
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(height: 20.0),
                     Container(
                       width: 325,
-                      child: TextFormField(
-                        obscureText: true,
-                        onChanged: (value) {
-                          setState(() => password = value);
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Enter password',
+                      child: ListTile(
+                        leading: Icon(Icons.lock),
+                        title: TextFormField(
+                          obscureText: _obscureText,
+                          onChanged: (value) {
+                            setState(() => password = value);
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Enter password',
+                            suffix: IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(),
+                              icon: _obscureText
+                                  ? Icon(
+                                      Icons.visibility_off,
+                                    )
+                                  : Icon(Icons.visibility),
+                              onPressed: _toggle,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(height: 20.0),
                     RaisedButton(
-                      color: Colors.blue,
+                      color: Theme.of(context).primaryColor,
                       textColor: Colors.white,
                       padding: EdgeInsets.all(5),
                       child: Text(

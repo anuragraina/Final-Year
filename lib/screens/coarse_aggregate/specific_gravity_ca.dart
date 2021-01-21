@@ -133,7 +133,7 @@ class SpecificGravityCA extends StatelessWidget {
               ),
             ),
             Card(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 5),
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Column(
@@ -163,7 +163,7 @@ class SpecificGravityCA extends StatelessWidget {
                       child: Container(
                         child: RaisedButton(
                           onPressed: () => calculate(context),
-                          color: Colors.blue,
+                          color: Theme.of(context).primaryColor,
                           textColor: Colors.white,
                           padding: EdgeInsets.all(5),
                           child: Text(
