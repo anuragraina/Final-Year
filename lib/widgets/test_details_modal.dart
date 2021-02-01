@@ -16,6 +16,28 @@ class ConfirmTestDetails extends StatefulWidget {
 class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
   String sampleUid;
 
+  int _ddbValue = 1;
+
+  DateTime selectedDate = DateTime.now();
+
+  var _formKey = GlobalKey<FormState>();
+
+  _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2050),
+      errorFormatText: 'Enter valid date',
+      errorInvalidText: 'Enter date in valid range',
+      fieldHintText: 'Month/Date/Year',
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +59,7 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                 Text(
                   'Test Category: ',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -79,6 +101,108 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                 ),
             ],
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                children: [
+                  TextFormField(
+                    validator: (String value) {
+                      if (value.isEmpty) {
+                        return 'Please enter sample source';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Enter sample source',
+                      errorStyle: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    validator: (String value) {
+                      if (value.isEmpty) {
+                        return 'Please enter sample type';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Enter sample type',
+                      errorStyle: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  DropdownButtonFormField(
+                    value: _ddbValue,
+                    items: [
+                      DropdownMenuItem(
+                        child: Text('First Item'),
+                        value: 1,
+                      ),
+                      DropdownMenuItem(
+                        child: Text('Second Item'),
+                        value: 2,
+                      ),
+                      DropdownMenuItem(
+                        child: Text('Third Item'),
+                        value: 3,
+                      ),
+                      DropdownMenuItem(
+                        child: Text('Fourth Item'),
+                        value: 4,
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _ddbValue = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                    elevation: 2,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "${selectedDate.toLocal()}".split(' ')[0],
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      RaisedButton(
+                        onPressed: () => _selectDate(context),
+                        child: Text(
+                          'Select date',
+                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black)),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Row(
@@ -89,8 +213,10 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 RaisedButton(
-                  child: Text('Approve'),
-                  onPressed: () {},
+                  child: Text('Send for Approval'),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {}
+                  },
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
                 )
