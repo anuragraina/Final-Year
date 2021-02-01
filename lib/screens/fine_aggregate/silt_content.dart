@@ -23,8 +23,7 @@ class SiltContent extends StatelessWidget {
     if (v1 != null && v2 != null) {
       var answer = (v2 / v1) * 100;
       var answerString = answer.toStringAsFixed(2) + '%';
-      // var answerText = 'Percentage of silt = ' + answerString;
-      // showAlertDialog(ctx, 'Silt content of sand', answerText);
+
       getTestDetails(
         context: ctx,
         testCategory: 'Fine Aggregate',

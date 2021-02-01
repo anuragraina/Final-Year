@@ -42,4 +42,16 @@ class DatabaseService {
   Stream getSites() {
     return _sites.snapshots();
   }
+
+  Stream getApprovedRecords() {
+    final CollectionReference _approvedTests =
+        FirebaseFirestore.instance.collection('users').doc(_user).collection('approved_tests');
+    return _approvedTests.snapshots();
+  }
+
+  Stream getPendingRecords() {
+    final CollectionReference _pendingTests =
+        FirebaseFirestore.instance.collection('users').doc(_user).collection('new_tests');
+    return _pendingTests.snapshots();
+  }
 }
