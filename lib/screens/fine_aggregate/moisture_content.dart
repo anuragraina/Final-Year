@@ -1,13 +1,15 @@
+import 'package:construction/widgets/test_details_modal.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/database.dart';
+// import '../../services/database.dart';
 
 import '../../widgets/procedure.dart';
-import '../../widgets/result_alert.dart';
+// import '../../widgets/result_alert.dart';
 import '../../widgets/missing_input.dart';
+import '../../widgets/test_details_modal.dart';
 
 class MoistureContent extends StatelessWidget {
-  final DatabaseService _database = DatabaseService();
+  // final DatabaseService _database = DatabaseService();
   final data = {};
 
   void getValues(type, value) {
@@ -25,10 +27,11 @@ class MoistureContent extends StatelessWidget {
       var vs = wc - wm + ws;
       var answer = (vs - vd) / (ws - vs);
       var answerString = answer.toStringAsFixed(2) + '%';
-      var answerText = 'Percentage of surface moisture = ' + answerString;
-      showAlertDialog(ctx, 'Moisture content', answerText);
+      // var answerText = 'Percentage of surface moisture = ' + answerString;
+      // showAlertDialog(ctx, 'Moisture content', answerText);
 
-      _database.addTest(
+      getTestDetails(
+        context: ctx,
         testCategory: 'Fine Aggregate',
         testName: 'Moisture Content',
         values: {
