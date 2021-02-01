@@ -17,25 +17,46 @@ class ConfirmTestDetails extends StatefulWidget {
 class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
   DatabaseService _db = DatabaseService();
   String sampleUid;
+  String sampleSource;
+  String sampleType;
   String selectedSite;
 
-  DateTime selectedDate = DateTime.now();
+  DateTime dateOfReceipt = DateTime.now();
+  DateTime dateOfTesting = DateTime.now();
 
   var _formKey = GlobalKey<FormState>();
 
-  _selectDate(BuildContext context) async {
+  _selectDateOfReceipt(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate, // Refer step 1
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2050),
+      initialDate: dateOfReceipt, // Refer step 1
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
       errorFormatText: 'Enter valid date',
       errorInvalidText: 'Enter date in valid range',
       fieldHintText: 'Month/Date/Year',
     );
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != dateOfReceipt) {
+      print(picked);
       setState(() {
-        selectedDate = picked;
+        dateOfReceipt = picked;
+      });
+    }
+  }
+
+  _selectDateOfTesting(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: dateOfTesting, // Refer step 1
+      firstDate: DateTime.now().subtract(new Duration(days: 7)),
+      lastDate: DateTime.now(),
+      errorFormatText: 'Enter valid date',
+      errorInvalidText: 'Enter date in valid range',
+      fieldHintText: 'Month/Date/Year',
+    );
+    if (picked != null && picked != dateOfTesting)
+      setState(() {
+        dateOfTesting = picked;
       });
   }
 
@@ -115,6 +136,25 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                   TextFormField(
                     validator: (String value) {
                       if (value.isEmpty) {
+                        return 'Please enter sample UID';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Enter sample UID',
+                      errorStyle: TextStyle(fontSize: 15),
+                    ),
+                    onChanged: (value) {
+                      setState(() => sampleUid = value);
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    validator: (String value) {
+                      if (value.isEmpty) {
                         return 'Please enter sample source';
                       } else {
                         return null;
@@ -124,6 +164,9 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                       hintText: 'Enter sample source',
                       errorStyle: TextStyle(fontSize: 15),
                     ),
+                    onChanged: (value) {
+                      setState(() => sampleSource = value);
+                    },
                   ),
                   SizedBox(
                     height: 20,
@@ -140,6 +183,9 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                       hintText: 'Enter sample type',
                       errorStyle: TextStyle(fontSize: 15),
                     ),
+                    onChanged: (value) {
+                      setState(() => sampleType = value);
+                    },
                   ),
                   SizedBox(
                     height: 20,
@@ -190,14 +236,35 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "${selectedDate.toLocal()}".split(' ')[0],
+                        'Date of receipt',
                         style: TextStyle(fontSize: 18),
                       ),
                       SizedBox(
                         width: 20.0,
                       ),
                       RaisedButton(
-                        onPressed: () => _selectDate(context),
+                        onPressed: () => _selectDateOfReceipt(context),
+                        child: Text(
+                          'Select date',
+                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Date of testing',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      RaisedButton(
+                        onPressed: () => _selectDateOfTesting(context),
                         child: Text(
                           'Select date',
                           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -223,7 +290,19 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                 RaisedButton(
                   child: Text('Send for Approval'),
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {}
+                    if (_formKey.currentState.validate()) {
+                      _db.addTest(
+                        testCategory: widget.testCategory,
+                        testName: widget.testName,
+                        values: widget.values,
+                        sampleUid: sampleUid,
+                        sampleSource: sampleSource,
+                        sampleType: sampleType,
+                        selectedSite: selectedSite,
+                        dateOfReceipt: dateOfReceipt,
+                        dateOfTesting: dateOfTesting,
+                      );
+                    }
                   },
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,

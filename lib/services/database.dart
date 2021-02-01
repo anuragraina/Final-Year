@@ -11,6 +11,12 @@ class DatabaseService {
     String testCategory,
     String testName,
     Map values,
+    String sampleUid,
+    String sampleSource,
+    String sampleType,
+    String selectedSite,
+    DateTime dateOfReceipt,
+    DateTime dateOfTesting,
   }) async {
     try {
       final CollectionReference _newTests =
@@ -21,6 +27,11 @@ class DatabaseService {
         'test_category': testCategory,
         'test_name': testName,
         'values': values,
+        'sample_uid': sampleUid,
+        'sample_source': sampleSource,
+        'site': selectedSite,
+        'date_of_receipt': dateOfReceipt,
+        'date_of_testing': dateOfTesting,
       });
       print(result);
     } catch (e) {
