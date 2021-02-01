@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import './auth.dart';
 
 class DatabaseService {
-  final AuthService _auth = AuthService();
-  final CollectionReference _newTests = FirebaseFirestore.instance.collection('newTests');
+  final String _user = AuthService().currentUser();
 
   //respond if addition was successful or not
   Future addTest({
@@ -12,9 +11,10 @@ class DatabaseService {
     Map values,
   }) async {
     try {
-      var user = _auth.currentUser();
+      final CollectionReference _newTests =
+          FirebaseFirestore.instance.collection('users').doc(_user).collection('new_tests');
+
       DocumentReference result = await _newTests.add({
-        'created_by': user,
         'created_on': FieldValue.serverTimestamp(),
         'test_category': testCategory,
         'test_name': testName,
