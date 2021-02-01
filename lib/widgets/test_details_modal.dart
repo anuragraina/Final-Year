@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 import '../services/database.dart';
 
@@ -62,6 +63,18 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pr = ProgressDialog(context);
+    pr = ProgressDialog(
+      context,
+      type: ProgressDialogType.Normal,
+      isDismissible: true,
+
+      /// your body here
+      customBody: LinearProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+        backgroundColor: Theme.of(context).backgroundColor,
+      ),
+    );
     return Container(
       padding: EdgeInsets.all(15),
       child: ListView(
@@ -289,9 +302,10 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                 ),
                 RaisedButton(
                   child: Text('Send for Approval'),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      _db.addTest(
+                      await pr.show();
+                      await _db.addTest(
                         testCategory: widget.testCategory,
                         testName: widget.testName,
                         values: widget.values,
@@ -302,6 +316,8 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                         dateOfReceipt: dateOfReceipt,
                         dateOfTesting: dateOfTesting,
                       );
+                      await pr.hide();
+                      Navigator.of(context).pop();
                     }
                   },
                   color: Theme.of(context).primaryColor,

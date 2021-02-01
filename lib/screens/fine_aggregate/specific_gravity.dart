@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../services/database.dart';
-
 import '../../widgets/procedure.dart';
-import '../../widgets/result_alert.dart';
 import '../../widgets/wrong_input_test_alert.dart';
 import '../../widgets/missing_input.dart';
+import '../../widgets/test_details_modal.dart';
 
 class SpecificGravity extends StatelessWidget {
-  final DatabaseService _database = DatabaseService();
   final data = {};
 
   void getValues(type, value) {
@@ -25,10 +22,9 @@ class SpecificGravity extends StatelessWidget {
       var answer = d / (c - (a - b));
       if (answer >= 1 && answer <= 4) {
         var answerString = answer.toStringAsFixed(2) + ' g/cc';
-        var answerText = 'Specific Gravity = ' + answerString;
-        showAlertDialog(ctx, 'Specific Gravity', answerText);
 
-        _database.addTest(
+        getTestDetails(
+          context: ctx,
           testCategory: 'Fine Aggregate',
           testName: 'Specific Gravity',
           values: {
