@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-//import '../services/database.dart';
+import '../services/database.dart';
 
 class ConfirmTestDetails extends StatefulWidget {
   final String testCategory;
@@ -14,9 +15,9 @@ class ConfirmTestDetails extends StatefulWidget {
 }
 
 class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
+  DatabaseService _db = DatabaseService();
   String sampleUid;
-
-  int _ddbValue = 1;
+  String selectedSite;
 
   DateTime selectedDate = DateTime.now();
 
@@ -143,37 +144,44 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                   SizedBox(
                     height: 20,
                   ),
-                  DropdownButtonFormField(
-                    value: _ddbValue,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text('First Item'),
-                        value: 1,
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Second Item'),
-                        value: 2,
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Third Item'),
-                        value: 3,
-                      ),
-                      DropdownMenuItem(
-                        child: Text('Fourth Item'),
-                        value: 4,
-                      ),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        _ddbValue = value;
-                      });
+                  StreamBuilder(
+                    stream: _db.getSites(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasError) {
+                        return Text('Something went wrong');
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+
+                      List<DropdownMenuItem> sites = [];
+
+                      if (!snapshot.hasData) {
+                        return Text('Loading..');
+                      } else {
+                        for (QueryDocumentSnapshot document in snapshot.data.docs) {
+                          final site = document.data();
+                          sites.add(
+                            DropdownMenuItem(
+                              child: Text(site['site_name']),
+                              value: "${document.id}",
+                            ),
+                          );
+                        }
+
+                        return DropdownButtonFormField(
+                          items: sites,
+                          onChanged: (clickedSite) {
+                            setState(() {
+                              selectedSite = clickedSite;
+                            });
+                          },
+                          value: selectedSite,
+                          hint: Text('Select Site'),
+                        );
+                      }
                     },
-                    decoration: InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                    ),
-                    elevation: 2,
                   ),
                   SizedBox(
                     height: 20,

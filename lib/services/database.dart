@@ -4,6 +4,8 @@ import './auth.dart';
 class DatabaseService {
   final String _user = AuthService().currentUser();
 
+  final CollectionReference _sites = FirebaseFirestore.instance.collection('sites');
+
   //respond if addition was successful or not
   Future addTest({
     String testCategory,
@@ -24,5 +26,9 @@ class DatabaseService {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Stream getSites() {
+    return _sites.snapshots();
   }
 }
