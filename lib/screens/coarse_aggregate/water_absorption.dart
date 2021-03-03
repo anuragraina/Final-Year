@@ -11,7 +11,11 @@ class WaterAbsorption extends StatelessWidget {
   final data = {};
 
   void getValues(type, value) {
-    data[type] = double.parse(value);
+    try {
+      data[type] = double.parse(value);
+    } catch (e) {
+      data[type] = null;
+    }
   }
 
   void calculate(ctx) {
