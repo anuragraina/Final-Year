@@ -5,11 +5,11 @@ showAlertDialogMissingInput(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Missing Input!"),
-        content: Text("Please enter all the required values"),
+        title: Text('Missing or incorrect Input!'),
+        content: Text('Please check if all the inputs are entered and have numeric values.'),
         actions: [
           FlatButton(
-            child: Text("OK"),
+            child: Text('OK'),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],

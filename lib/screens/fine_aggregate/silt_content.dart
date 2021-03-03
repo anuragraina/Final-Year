@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-//import '../../services/database.dart';
-
 import '../../widgets/procedure.dart';
-//import '../../widgets/result_alert.dart';
 import '../../widgets/missing_input.dart';
 import '../../widgets/test_details_modal.dart';
 
 class SiltContent extends StatelessWidget {
-  //final DatabaseService _database = DatabaseService();
   final data = {};
 
   void getValues(type, value) {
-    //add error handling
-    data[type] = double.parse(value);
+    try {
+      data[type] = double.parse(value);
+    } catch (e) {
+      data[type] = null;
+    }
   }
 
   void calculate(ctx) {
@@ -34,16 +33,6 @@ class SiltContent extends StatelessWidget {
           'Percentage of silt': answerString,
         },
       );
-
-      // _database.addTest(
-      //   testCategory: 'Fine Aggregate',
-      //   testName: 'Silt Content',
-      //   values: {
-      //     'v1': v1,
-      //     'v2': v2,
-      //     'Percentage of silt': answerString,
-      //   },
-      //);
     } else {
       showAlertDialogMissingInput(ctx);
     }
