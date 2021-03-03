@@ -14,12 +14,9 @@ class MaterialTesting extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TestCategory(name: 'Fine Aggregate', route: '/fine-aggregate'),
-            TestCategory(
-              name: 'Coarse Aggregate',
-              route: '/coarse-aggregate',
-            ),
-            TestCategory(name: 'Water'),
-            TestCategory(name: 'Concrete'),
+            TestCategory(name: 'Coarse Aggregate', route: '/coarse-aggregate'),
+            // TestCategory(name: 'Water'),
+            // TestCategory(name: 'Concrete'),
           ],
         ),
       ),

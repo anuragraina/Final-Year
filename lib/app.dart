@@ -15,6 +15,8 @@ import './screens/coarse_aggregate/water_absorption.dart';
 import './screens/coarse_aggregate/specific_gravity_ca.dart';
 import './screens/approved tests/approved_tests.dart';
 import './screens/pending tests/pending_tests.dart';
+import './screens/fine_aggregate/gradation.dart';
+import './screens/coarse_aggregate/gradation_ca.dart';
 
 class App extends StatelessWidget {
   @override
@@ -42,6 +44,8 @@ class App extends StatelessWidget {
             '/coarse-aggregate/specific-gravity': (ctx) => SpecificGravityCA(),
             '/approved-tests': (ctx) => ApprovedTests(),
             '/pending-tests': (ctx) => PendingTests(),
+            '/fine-aggregate/gradation': (ctx) => Gradation(),
+            '/coarse-aggregate/gradation_ca': (ctx) => GradationCA(),
           }),
     );
   }
