@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
 
-class Gradation extends StatefulWidget {
-  @override
-  _GradationState createState() => _GradationState();
-}
+class Gradation extends StatelessWidget {
+  final input = {};
+  final data = {
+    '10MM': {},
+    '4.75MM': {},
+    '2.36MM': {},
+    '1.18MM': {},
+    '600μ': {},
+    '300μ': {},
+    '150μ': {},
+    '<150μ': {},
+  };
 
-class _GradationState extends State<Gradation> {
-  final data = {};
-  String one;
-  String two;
-  String three;
-  String four;
-  String five;
-  String six;
-  String seven;
-  String eight;
+  void calculate() {
+    double sum = 0;
+    for (var item in input.keys) {
+      data[item]['wt_retained'] = double.parse(input[item]);
+    }
+    for (var item in data.keys) {
+      sum += data[item]['wt_retained'];
+      data[item]['cm_wt_retained'] = sum;
+    }
+    for (var item in data.keys) {
+      data[item]['cm_%_wt_retained'] = (data[item]['cm_wt_retained'] / sum) * 100;
+    }
+    for (var item in data.keys) {
+      data[item]['cm_%_wt_passing'] = 100 - data[item]['cm_%_wt_retained'];
+    }
 
-  void getValues(type, value) {
-    //add error handling
-    data[type] = double.parse(value);
+    for (var item in data.keys) {
+      print(data[item]);
+    }
   }
 
   @override
@@ -85,7 +98,7 @@ class _GradationState extends State<Gradation> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => one = value);
+                                    input['10MM'] = value;
                                   },
                                 ),
                               ),
@@ -105,7 +118,7 @@ class _GradationState extends State<Gradation> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => two = value);
+                                    input['4.75MM'] = value;
                                   },
                                 ),
                               ),
@@ -125,7 +138,7 @@ class _GradationState extends State<Gradation> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => three = value);
+                                    input['2.36MM'] = value;
                                   },
                                 ),
                               ),
@@ -145,7 +158,7 @@ class _GradationState extends State<Gradation> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => four = value);
+                                    input['1.18MM'] = value;
                                   },
                                 ),
                               ),
@@ -165,7 +178,7 @@ class _GradationState extends State<Gradation> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => five = value);
+                                    input['600μ'] = value;
                                   },
                                 ),
                               ),
@@ -185,7 +198,7 @@ class _GradationState extends State<Gradation> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => six = value);
+                                    input['300μ'] = value;
                                   },
                                 ),
                               ),
@@ -205,7 +218,7 @@ class _GradationState extends State<Gradation> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => seven = value);
+                                    input['150μ'] = value;
                                   },
                                 ),
                               ),
@@ -225,7 +238,7 @@ class _GradationState extends State<Gradation> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => eight = value);
+                                    input['<150μ'] = value;
                                   },
                                 ),
                               ),
@@ -236,7 +249,7 @@ class _GradationState extends State<Gradation> {
                     ),
                     Container(
                       child: RaisedButton(
-                        onPressed: () => {},
+                        onPressed: calculate,
                         color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         child: Text(
