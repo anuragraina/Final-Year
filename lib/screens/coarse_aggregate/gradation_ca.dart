@@ -1,28 +1,58 @@
 import 'package:flutter/material.dart';
 
-class GradationCA extends StatefulWidget {
-  @override
-  _GradationCAState createState() => _GradationCAState();
-}
+import '../../widgets/test_details_modal.dart';
 
-class _GradationCAState extends State<GradationCA> {
-  final data = {};
-  String one;
-  String two;
-  String three;
-  String four;
-  String five;
-  String six;
-  String seven;
-  String eight;
-  String nine;
-  String ten;
-  String eleven;
-  String twelve;
+class GradationCA extends StatelessWidget {
+  final input = {};
+  final data = {
+    '40MM': {},
+    '20MM': {},
+    '16MM': {},
+    '12.5MM': {},
+    '10MM': {},
+    '4.75MM': {},
+    '2.36MM': {},
+    '1.18MM': {},
+    '600μ': {},
+    '300μ': {},
+    '150μ': {},
+    '<150μ': {},
+  };
 
-  void getValues(type, value) {
-    //add error handling
-    data[type] = double.parse(value);
+  void calculate(ctx) {
+    double sum = 0;
+    double finenessSum = 0;
+
+    for (var item in input.keys) {
+      data[item]['wt_retained'] = double.parse(input[item]);
+    }
+    for (var item in data.keys) {
+      sum += data[item]['wt_retained'];
+      data[item]['cm_wt_retained'] = sum;
+    }
+    for (var item in data.keys) {
+      data[item]['cm_%_wt_retained'] = (data[item]['cm_wt_retained'] / sum) * 100;
+    }
+    for (var item in data.keys) {
+      data[item]['cm_%_wt_passing'] = 100 - data[item]['cm_%_wt_retained'];
+      finenessSum += data[item]['cm_%_wt_retained'];
+    }
+
+    double finenessModulus = finenessSum / 100;
+
+    getTestDetails(
+      context: ctx,
+      testCategory: 'Coarse Aggregate',
+      testName: 'Gradation',
+      values: {
+        'data': data,
+        'fineness_modulus': finenessModulus,
+      },
+    );
+
+    for (var item in data.keys) {
+      print(data[item]);
+    }
   }
 
   @override
@@ -67,7 +97,7 @@ class _GradationCAState extends State<GradationCA> {
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
                                 child: Text(
-                                  'WEIGHT RETAINED (kg)',
+                                  'WEIGHT RETAINED (gm)',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -89,7 +119,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => one = value);
+                                    input['40MM'] = value;
                                   },
                                 ),
                               ),
@@ -109,7 +139,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => two = value);
+                                    input['20MM'] = value;
                                   },
                                 ),
                               ),
@@ -129,7 +159,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => three = value);
+                                    input['16MM'] = value;
                                   },
                                 ),
                               ),
@@ -149,7 +179,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => four = value);
+                                    input['12.5MM'] = value;
                                   },
                                 ),
                               ),
@@ -169,7 +199,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => five = value);
+                                    input['10MM'] = value;
                                   },
                                 ),
                               ),
@@ -189,7 +219,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => six = value);
+                                    input['4.75MM'] = value;
                                   },
                                 ),
                               ),
@@ -209,7 +239,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => seven = value);
+                                    input['2.36MM'] = value;
                                   },
                                 ),
                               ),
@@ -229,7 +259,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => eight = value);
+                                    input['1.18MM'] = value;
                                   },
                                 ),
                               ),
@@ -249,7 +279,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => nine = value);
+                                    input['600μ'] = value;
                                   },
                                 ),
                               ),
@@ -269,7 +299,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => ten = value);
+                                    input['300μ'] = value;
                                   },
                                 ),
                               ),
@@ -289,7 +319,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => eleven = value);
+                                    input['150μ'] = value;
                                   },
                                 ),
                               ),
@@ -309,7 +339,7 @@ class _GradationCAState extends State<GradationCA> {
                               child: Center(
                                 child: TextField(
                                   onChanged: (value) {
-                                    setState(() => twelve = value);
+                                    input['<150μ'] = value;
                                   },
                                 ),
                               ),
@@ -320,7 +350,7 @@ class _GradationCAState extends State<GradationCA> {
                     ),
                     Container(
                       child: RaisedButton(
-                        onPressed: () => {},
+                        onPressed: () => calculate(context),
                         color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         child: Text(
