@@ -29,6 +29,7 @@ class SpecificGravityCA extends StatelessWidget {
 
         getTestDetails(
           context: ctx,
+          testCategory: 'Coarse Aggregate',
           testName: 'Specific Gravity',
           values: {
             'a': a,

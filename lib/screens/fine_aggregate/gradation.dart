@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/test_details_modal.dart';
+
 class Gradation extends StatelessWidget {
   final input = {};
   final data = {
@@ -13,8 +15,10 @@ class Gradation extends StatelessWidget {
     '<150μ': {},
   };
 
-  void calculate() {
+  void calculate(ctx) {
     double sum = 0;
+    double finenessSum = 0;
+
     for (var item in input.keys) {
       data[item]['wt_retained'] = double.parse(input[item]);
     }
@@ -27,7 +31,20 @@ class Gradation extends StatelessWidget {
     }
     for (var item in data.keys) {
       data[item]['cm_%_wt_passing'] = 100 - data[item]['cm_%_wt_retained'];
+      finenessSum += data[item]['cm_%_wt_retained'];
     }
+
+    double finenessModulus = finenessSum / 100;
+
+    getTestDetails(
+      context: ctx,
+      testCategory: 'Fine Aggregate',
+      testName: 'Gradation',
+      values: {
+        'data': data,
+        'fineness_modulus': finenessModulus,
+      },
+    );
 
     for (var item in data.keys) {
       print(data[item]);
@@ -249,7 +266,7 @@ class Gradation extends StatelessWidget {
                     ),
                     Container(
                       child: RaisedButton(
-                        onPressed: calculate,
+                        onPressed: () => calculate(context),
                         color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         child: Text(

@@ -118,23 +118,118 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
               ),
             ),
           ),
-          Table(
-            border: TableBorder.all(),
-            children: [
-              for (var item in widget.values.keys)
-                TableRow(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(child: Text(item.toString())),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(child: Text(widget.values[item].toString())),
-                    ),
-                  ],
+          if (widget.testName != 'Gradation')
+            Table(
+              border: TableBorder.all(),
+              children: [
+                for (var item in widget.values.keys)
+                  TableRow(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: Text(item.toString())),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: Text(widget.values[item].toString())),
+                      ),
+                    ],
+                  ),
+              ],
+            )
+          else
+            Table(
+              border: TableBorder.all(),
+              children: [
+                TableRow(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: Text(
+                      'IS Sieve Size',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: Text(
+                      'Weight Retained (gm)',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: Text(
+                      'Cumulative Wt. Retained (gm)',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: Text(
+                      'Cumulative % Wt. Retained',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: Text(
+                      'Cumulative % Wt. Passing',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                  ),
+                ]),
+                for (var item in widget.values['data'].keys)
+                  TableRow(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            item.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      for (var detail in widget.values['data'][item].keys)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                              child: Text(widget.values['data'][item][detail].toStringAsFixed(3))),
+                        ),
+                    ],
+                  ),
+              ],
+            ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(
+                  'Fineness Modulus : ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-            ],
+                Text(widget.values['fineness_modulus'].toStringAsFixed(3))
+              ],
+            ),
           ),
           SizedBox(
             height: 20,
@@ -338,13 +433,6 @@ void getTestDetails({
   String testName,
   Map values,
 }) {
-  //final DatabaseService _database = DatabaseService();
-
-  // void _approveTest(BuildContext ctx, Map data) {
-  //   //_database.addTest(data);
-  //   Navigator.of(context).pop();
-  // }
-
   showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
