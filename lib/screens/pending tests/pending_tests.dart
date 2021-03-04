@@ -23,7 +23,10 @@ class PendingTests extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
 
-          //add empty list widget
+          if (snapshot.data.docs.isEmpty) {
+            return Center(child: Text('No pending tests available'));
+          }
+
           return Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
