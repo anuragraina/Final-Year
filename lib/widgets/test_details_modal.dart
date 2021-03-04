@@ -217,20 +217,21 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                   ),
               ],
             ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Text(
-                  'Fineness Modulus : ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+          if (widget.testName == 'Gradation')
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    'Fineness Modulus : ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(widget.values['fineness_modulus'].toStringAsFixed(3))
-              ],
+                  Text(widget.values['fineness_modulus'].toStringAsFixed(3))
+                ],
+              ),
             ),
-          ),
           SizedBox(
             height: 20,
           ),
@@ -399,20 +400,26 @@ class _ConfirmTestDetailsState extends State<ConfirmTestDetails> {
                   child: Text('Send for Approval'),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      await pr.show();
-                      await _db.addTest(
-                        testCategory: widget.testCategory,
-                        testName: widget.testName,
-                        values: widget.values,
-                        sampleUid: sampleUid,
-                        sampleSource: sampleSource,
-                        sampleType: sampleType,
-                        selectedSite: selectedSite,
-                        dateOfReceipt: dateOfReceipt,
-                        dateOfTesting: dateOfTesting,
-                      );
-                      await pr.hide();
-                      Navigator.of(context).pop();
+                      try {
+                        await pr.show();
+                        dynamic site = await _db.getSiteDetails(selectedSite);
+                        String siteString = site['site_name'].toString() + ', ' + site['location'];
+                        await _db.addTest(
+                          testCategory: widget.testCategory,
+                          testName: widget.testName,
+                          values: widget.values,
+                          sampleUid: sampleUid,
+                          sampleSource: sampleSource,
+                          sampleType: sampleType,
+                          selectedSite: siteString,
+                          dateOfReceipt: dateOfReceipt,
+                          dateOfTesting: dateOfTesting,
+                        );
+                        await pr.hide();
+                        Navigator.of(context).pop();
+                      } catch (e) {
+                        print(e.toString());
+                      }
                     }
                   },
                   color: Theme.of(context).primaryColor,

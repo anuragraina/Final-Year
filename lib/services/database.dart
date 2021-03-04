@@ -39,6 +39,16 @@ class DatabaseService {
     }
   }
 
+  Future getSiteDetails(String uid) async {
+    try {
+      DocumentSnapshot site = await _sites.doc(uid).get();
+      return site;
+    } catch (e) {
+      print(e.toString());
+      return e;
+    }
+  }
+
   Stream getSites() {
     return _sites.snapshots();
   }
